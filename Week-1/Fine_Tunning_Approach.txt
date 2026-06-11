@@ -1,0 +1,36 @@
+1. Prepare dataset
+First we create a dataset of examples where:
+Input = user prompt (e.g., “make a coffee promo video”)
+Output = correct Creatomate JSON
+This teaches the model what to produce.
+
+2. Load base model
+You start with a pre-trained model (like Mistral or LLaMA).
+This model already understands language but does not know your task.
+
+3. Add LoRA (light training layer)
+Instead of training the whole model, we attach small trainable layers (LoRA).
+This makes training:
+faster
+cheaper
+requires less GPU memory
+
+4. Tokenize dataset
+Convert text examples into numbers (tokens) so the model can understand them.
+
+5. Train the model
+You feed your dataset into the model:
+It sees prompt , correct JSON
+It adjusts LoRA layers to learn the pattern
+Over time, it learns:
+“Whenever user asks for a video, output Creatomate JSON format”
+
+6. Save the trained model
+After training, you save:
+base model (unchanged)
+LoRA adapters (learned knowledge)
+
+7. Use the model (inference)
+Now when you give a prompt:
+It directly generates correct Creatomate JSON
+No need for strict prompting or function calling
